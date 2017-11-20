@@ -1,1 +1,5 @@
-FSharp.Core
+Microsoft.WindowsAzure.ConfigurationManager
+WindowsAzure.Storage
+Streamstone
+Newtonsoft.Json
+Fable.JsonConverter

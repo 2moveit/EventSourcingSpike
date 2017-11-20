@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>EventSourcingSpike</RootNamespace>
     <AssemblyName>EventSourcingSpike</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <Name>EventSourcingSpike</Name>
     <TargetFrameworkProfile />
     <DocumentationFile>.\bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
@@ -51,19 +51,6 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
   <Import Project="..\..\.paket\paket.targets" />
-  <ItemGroup>
-    <Compile Include="Library.fs" />
-    <None Include="Script.fsx" />
-    <None Include="paket.references" />
-    <None Include="paket.template" />
-    <Content Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-  </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2' Or $(TargetFrameworkVersion) == 'v4.6.3' Or $(TargetFrameworkVersion) == 'v4.7' Or $(TargetFrameworkVersion) == 'v4.7.1')">
       <ItemGroup>
@@ -75,4 +62,21 @@
       </ItemGroup>
     </When>
   </Choose>
+  <ItemGroup>
+    <None Include="paket.references" />
+    <Content Include="App.config" />
+    <None Include="Tests.fsx" />
+    <None Include="ES.fsx" />
+    <None Include="TableStorage.fsx" />
+    <Compile Include="Domain.fs" />
+    <Compile Include="SerializationAdapter.fs" />
+    <Compile Include="EventStoreAdapter.fs" />
+    <None Include="Streamstone.fsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+  </ItemGroup>
 </Project>
