@@ -37,9 +37,13 @@ let save (id:LicenseeId) (EventVersion expected) (events:Event list) = async{
     let partition =  Partition(table , partitionKey id)
     
   //  printfn "Writing to new stream in partition %A" stream.Partition //TODO: Wie richtig loggen (fire&forget)
-    let! result = Stream.WriteAsync(partition, expected, data)   |> Async.AwaitTask
-    printf "Succesfully written to new stream.\r\nEtag: %s, Version: %i" result.Stream.ETag result.Stream.Version //TODO: Wie mit fehler umgehen? 
-    return EventVersion result.Stream.Version
+    try
+       let! result = Stream.WriteAsync(partition, expected, data)   |> Async.AwaitTask
+       printf "Succesfully written to new stream.\r\nEtag: %s, Version: %i" result.Stream.ETag result.Stream.Version //TODO: Wie mit fehler umgehen? 
+       return Ok(EventVersion result.Stream.Version)
+    with
+    | :? ConcurrencyConflictException as ex -> return Error ("Key.ConcurrencyConflict", ex.Message)
+    
     }
 
 let private toEvent data :Event=
