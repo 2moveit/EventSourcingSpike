@@ -89,7 +89,7 @@ load testid |> Async.RunSynchronously
 let print id = async {
                     let! l = load id 
                     l
-                    |> project1 
+                    |>fun (ev, v) -> project1 ev,v
                     |> printfn "%A"
 }
 

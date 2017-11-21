@@ -9,7 +9,7 @@ open SerializationAdapter
 
 type private Data = {Id:Guid; Type:string; Data:string}
 
-type private EventEntity(``type``:string, data:string, version:int) =
+type EventEntity(``type``:string, data:string, version:int) =
     new () = EventEntity("", "", 0)
     member val Type = ``type`` with get,set
     member val Data = data with get,set

@@ -1,5 +1,6 @@
 Microsoft.WindowsAzure.ConfigurationManager
 WindowsAzure.Storage
-Streamstone
 Newtonsoft.Json
+FSharp.Core
 Fable.JsonConverter
+Streamstone

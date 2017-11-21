@@ -1,4 +1,4 @@
-redirects: on
+//redirects: on
 source https://www.nuget.org/api/v2
 nuget Fable.JsonConverter
 nuget FSharp.Compiler.Tools
