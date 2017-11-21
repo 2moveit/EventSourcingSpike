@@ -1,7 +1,11 @@
+redirects: on
 source https://www.nuget.org/api/v2
 nuget Fable.JsonConverter
+nuget FSharp.Compiler.Tools
+nuget FSharp.Configuration
+nuget FSharp.Control.AsyncSeq
+nuget FSharp.Core
 nuget Microsoft.WindowsAzure.ConfigurationManager
 nuget Newtonsoft.Json
 nuget Streamstone
 nuget WindowsAzure.Storage
-nuget NodaTime ~> 1.3

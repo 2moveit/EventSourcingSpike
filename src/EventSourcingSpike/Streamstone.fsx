@@ -1,5 +1,5 @@
 #if INTERACTIVE
-#I @"./../packages"
+#I @"./../../packages"
 #r @"Streamstone/lib/netstandard1.6/Streamstone.dll"
 #r @"WindowsAzure.Storage\lib\net45\Microsoft.WindowsAzure.Storage.dll"
 #r @"Microsoft.WindowsAzure.ConfigurationManager\lib\net40\Microsoft.WindowsAzure.Configuration.dll"
