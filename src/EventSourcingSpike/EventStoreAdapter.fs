@@ -7,7 +7,7 @@ open Microsoft.WindowsAzure.Storage // Namespace for CloudStorageAccount
 open Microsoft.WindowsAzure.Storage.Table
 open SerializationAdapter
 
-type private Data = {Id:Guid; Type:string; Data:string}
+type Data = {Id:Guid; Type:string; Data:string}
 
 type EventEntity(``type``:string, data:string, version:int) =
     new () = EventEntity("", "", 0)

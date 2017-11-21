@@ -7,5 +7,5 @@ nuget FSharp.Control.AsyncSeq
 nuget FSharp.Core
 nuget Microsoft.WindowsAzure.ConfigurationManager
 nuget Newtonsoft.Json
-nuget Streamstone
+nuget Streamstone ~> 1
 nuget WindowsAzure.Storage
