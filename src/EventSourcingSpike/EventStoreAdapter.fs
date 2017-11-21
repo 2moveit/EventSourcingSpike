@@ -29,17 +29,17 @@ let private toEventData ev=
     let properties = {Data.Id = id;Type = ev.GetType().Name; Data = serialize ev}
     EventData(EventId.From(id), EventProperties.From(properties))
 
-    
-let save (id:LicenseeId) (events:Event list) = async{
+
+
+let save (id:LicenseeId) (EventVersion expected) (events:Event list) = async{
     let data = events |> List.map toEventData |> List.toArray
     let table = prepare()
     let partition =  Partition(table , partitionKey id)
-    let! openResult = Stream.TryOpenAsync(partition) |> Async.AwaitTask 
-    let stream = if openResult.Found then openResult.Stream else Stream(partition)
     
-    printfn "Writing to new stream in partition %A" stream.Partition //TODO: Wie richtig loggen (fire&forget)
-    let! result = Stream.WriteAsync(stream, data)   |> Async.AwaitTask
+  //  printfn "Writing to new stream in partition %A" stream.Partition //TODO: Wie richtig loggen (fire&forget)
+    let! result = Stream.WriteAsync(partition, expected, data)   |> Async.AwaitTask
     printf "Succesfully written to new stream.\r\nEtag: %s, Version: %i" result.Stream.ETag result.Stream.Version //TODO: Wie mit fehler umgehen? 
+    return EventVersion result.Stream.Version
     }
 
 let private toEvent data :Event=
@@ -51,6 +51,5 @@ let load (id:LicenseeId) = async{
     let partition =  Partition(table , partitionKey id)
     let! s = Stream.ReadAsync<EventEntity> (partition, 1, 100000) |> Async.AwaitTask // TODO: Parameter prüfen/verbessern
     let ev = s.Events |> Array.map (fun ev -> toEvent ev.Data) |> Array.toList
-    return ev, s.Stream.Version
-   // |> Seq.iter (fun ev -> printfn "%i %s - %s" ev.Version ev.Type ev.Data) 
+    return ev, EventVersion s.Stream.Version
     }

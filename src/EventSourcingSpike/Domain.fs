@@ -2,7 +2,7 @@
 module Domain
 open System
 
-
+type EventVersion = EventVersion of int
 type LicenseeId = LicenseeId of Guid 
 
 type Command =
